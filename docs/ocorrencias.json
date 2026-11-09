@@ -1,0 +1,1487 @@
+[
+  {
+    "_id": {
+      "$oid": "66000000000000000000001e"
+    },
+    "acessibilidade": false,
+    "atualizado_em": {
+      "$date": "2026-11-10T07:00:30.487Z"
+    },
+    "categoria": "Limpeza",
+    "criado_em": {
+      "$date": "2026-11-07T11:00:30.487Z"
+    },
+    "custo_estimado": 35.0,
+    "demonstracao": true,
+    "descricao": "Foi identificado o seguinte problema: reposição de sabonete. Local: Banheiro do corredor, bloco E. Solicita-se avaliação da equipe responsável. Registro fictício para demonstração acadêmica.",
+    "fotos": [],
+    "historico": [
+      {
+        "status": "aberto",
+        "data": {
+          "$date": "2026-11-07T11:00:30.487Z"
+        },
+        "observacao": "Ocorrência de demonstração criada."
+      },
+      {
+        "status": "resolvido",
+        "data": {
+          "$date": "2026-11-10T07:00:30.487Z"
+        },
+        "observacao": "Atualização de demonstração."
+      }
+    ],
+    "localizacao": {
+      "bloco": "E",
+      "sala": "Banheiro do corredor",
+      "andar": 0
+    },
+    "prioridade": 1,
+    "resolvido_em": {
+      "$date": "2026-11-10T07:00:30.487Z"
+    },
+    "responsavel": "Equipe de manutenção",
+    "solicitante": {
+      "nome": "Estudante Exemplo 30",
+      "email": "estudante30@example.com"
+    },
+    "status": "resolvido",
+    "tags": [
+      "limpeza",
+      "demonstração"
+    ],
+    "titulo": "Reposição de sabonete"
+  },
+  {
+    "_id": {
+      "$oid": "66000000000000000000001d"
+    },
+    "acessibilidade": false,
+    "atualizado_em": {
+      "$date": "2026-11-06T12:00:30.487Z"
+    },
+    "categoria": "Infraestrutura",
+    "criado_em": {
+      "$date": "2026-11-06T12:00:30.487Z"
+    },
+    "custo_estimado": 230.0,
+    "demonstracao": true,
+    "descricao": "Foi identificado o seguinte problema: ventilador sem proteção. Local: Sala 201, bloco A. Solicita-se avaliação da equipe responsável. Registro fictício para demonstração acadêmica.",
+    "fotos": [],
+    "historico": [
+      {
+        "status": "aberto",
+        "data": {
+          "$date": "2026-11-06T12:00:30.487Z"
+        },
+        "observacao": "Ocorrência de demonstração criada."
+      }
+    ],
+    "localizacao": {
+      "bloco": "A",
+      "sala": "Sala 201",
+      "andar": 0
+    },
+    "prioridade": 4,
+    "resolvido_em": null,
+    "responsavel": "",
+    "solicitante": {
+      "nome": "Estudante Exemplo 29",
+      "email": "estudante29@example.com"
+    },
+    "status": "aberto",
+    "tags": [
+      "infraestrutura",
+      "demonstração"
+    ],
+    "titulo": "Ventilador sem proteção"
+  },
+  {
+    "_id": {
+      "$oid": "66000000000000000000001c"
+    },
+    "acessibilidade": true,
+    "atualizado_em": {
+      "$date": "2026-11-05T17:00:30.487Z"
+    },
+    "categoria": "Acessibilidade",
+    "criado_em": {
+      "$date": "2026-11-05T13:00:30.487Z"
+    },
+    "custo_estimado": 140.0,
+    "demonstracao": true,
+    "descricao": "Foi identificado o seguinte problema: maçaneta de difícil acesso. Local: Sala de convivência, bloco D. Solicita-se avaliação da equipe responsável. Registro fictício para demonstração acadêmica.",
+    "fotos": [],
+    "historico": [
+      {
+        "status": "aberto",
+        "data": {
+          "$date": "2026-11-05T13:00:30.487Z"
+        },
+        "observacao": "Ocorrência de demonstração criada."
+      },
+      {
+        "status": "em_manutencao",
+        "data": {
+          "$date": "2026-11-05T17:00:30.487Z"
+        },
+        "observacao": "Atualização de demonstração."
+      }
+    ],
+    "localizacao": {
+      "bloco": "D",
+      "sala": "Sala de convivência",
+      "andar": 1
+    },
+    "prioridade": 2,
+    "resolvido_em": null,
+    "responsavel": "Equipe de manutenção",
+    "solicitante": {
+      "nome": "Estudante Exemplo 28",
+      "email": "estudante28@example.com"
+    },
+    "status": "em_manutencao",
+    "tags": [
+      "acessibilidade",
+      "demonstração"
+    ],
+    "titulo": "Maçaneta de difícil acesso"
+  },
+  {
+    "_id": {
+      "$oid": "66000000000000000000001b"
+    },
+    "acessibilidade": false,
+    "atualizado_em": {
+      "$date": "2026-11-06T21:00:30.487Z"
+    },
+    "categoria": "Limpeza",
+    "criado_em": {
+      "$date": "2026-11-04T07:00:30.487Z"
+    },
+    "custo_estimado": 0.0,
+    "demonstracao": true,
+    "descricao": "Foi identificado o seguinte problema: higienização de mesas. Local: Estudo em grupo, bloco C. Solicita-se avaliação da equipe responsável. Registro fictício para demonstração acadêmica.",
+    "fotos": [],
+    "historico": [
+      {
+        "status": "aberto",
+        "data": {
+          "$date": "2026-11-04T07:00:30.487Z"
+        },
+        "observacao": "Ocorrência de demonstração criada."
+      },
+      {
+        "status": "resolvido",
+        "data": {
+          "$date": "2026-11-06T21:00:30.487Z"
+        },
+        "observacao": "Atualização de demonstração."
+      }
+    ],
+    "localizacao": {
+      "bloco": "C",
+      "sala": "Estudo em grupo",
+      "andar": 0
+    },
+    "prioridade": 1,
+    "resolvido_em": {
+      "$date": "2026-11-06T21:00:30.487Z"
+    },
+    "responsavel": "Equipe de manutenção",
+    "solicitante": {
+      "nome": "Estudante Exemplo 27",
+      "email": "estudante27@example.com"
+    },
+    "status": "resolvido",
+    "tags": [
+      "limpeza",
+      "demonstração"
+    ],
+    "titulo": "Higienização de mesas"
+  },
+  {
+    "_id": {
+      "$oid": "66000000000000000000001a"
+    },
+    "acessibilidade": false,
+    "atualizado_em": {
+      "$date": "2026-11-03T12:00:30.487Z"
+    },
+    "categoria": "Elétrica",
+    "criado_em": {
+      "$date": "2026-11-03T08:00:30.487Z"
+    },
+    "custo_estimado": 420.0,
+    "demonstracao": true,
+    "descricao": "Foi identificado o seguinte problema: iluminação externa insuficiente. Local: Acesso ao laboratório, bloco B. Solicita-se avaliação da equipe responsável. Registro fictício para demonstração acadêmica.",
+    "fotos": [],
+    "historico": [
+      {
+        "status": "aberto",
+        "data": {
+          "$date": "2026-11-03T08:00:30.487Z"
+        },
+        "observacao": "Ocorrência de demonstração criada."
+      },
+      {
+        "status": "em_analise",
+        "data": {
+          "$date": "2026-11-03T12:00:30.487Z"
+        },
+        "observacao": "Atualização de demonstração."
+      }
+    ],
+    "localizacao": {
+      "bloco": "B",
+      "sala": "Acesso ao laboratório",
+      "andar": 0
+    },
+    "prioridade": 3,
+    "resolvido_em": null,
+    "responsavel": "Equipe de manutenção",
+    "solicitante": {
+      "nome": "Estudante Exemplo 26",
+      "email": "estudante26@example.com"
+    },
+    "status": "em_analise",
+    "tags": [
+      "elétrica",
+      "demonstração"
+    ],
+    "titulo": "Iluminação externa insuficiente"
+  },
+  {
+    "_id": {
+      "$oid": "660000000000000000000019"
+    },
+    "acessibilidade": false,
+    "atualizado_em": {
+      "$date": "2026-11-02T09:00:30.487Z"
+    },
+    "categoria": "Hidráulica",
+    "criado_em": {
+      "$date": "2026-11-02T09:00:30.487Z"
+    },
+    "custo_estimado": 210.0,
+    "demonstracao": true,
+    "descricao": "Foi identificado o seguinte problema: descarga com vazamento. Local: Banheiro acessível, bloco C. Solicita-se avaliação da equipe responsável. Registro fictício para demonstração acadêmica.",
+    "fotos": [],
+    "historico": [
+      {
+        "status": "aberto",
+        "data": {
+          "$date": "2026-11-02T09:00:30.487Z"
+        },
+        "observacao": "Ocorrência de demonstração criada."
+      }
+    ],
+    "localizacao": {
+      "bloco": "C",
+      "sala": "Banheiro acessível",
+      "andar": 0
+    },
+    "prioridade": 3,
+    "resolvido_em": null,
+    "responsavel": "",
+    "solicitante": {
+      "nome": "Estudante Exemplo 25",
+      "email": "estudante25@example.com"
+    },
+    "status": "aberto",
+    "tags": [
+      "hidráulica",
+      "demonstração"
+    ],
+    "titulo": "Descarga com vazamento"
+  },
+  {
+    "_id": {
+      "$oid": "660000000000000000000018"
+    },
+    "acessibilidade": false,
+    "atualizado_em": {
+      "$date": "2026-11-01T14:00:30.487Z"
+    },
+    "categoria": "Tecnologia",
+    "criado_em": {
+      "$date": "2026-11-01T10:00:30.487Z"
+    },
+    "custo_estimado": 180.0,
+    "demonstracao": true,
+    "descricao": "Foi identificado o seguinte problema: impressora não conecta. Local: Atendimento, bloco E. Solicita-se avaliação da equipe responsável. Registro fictício para demonstração acadêmica.",
+    "fotos": [],
+    "historico": [
+      {
+        "status": "aberto",
+        "data": {
+          "$date": "2026-11-01T10:00:30.487Z"
+        },
+        "observacao": "Ocorrência de demonstração criada."
+      },
+      {
+        "status": "em_manutencao",
+        "data": {
+          "$date": "2026-11-01T14:00:30.487Z"
+        },
+        "observacao": "Atualização de demonstração."
+      }
+    ],
+    "localizacao": {
+      "bloco": "E",
+      "sala": "Atendimento",
+      "andar": 1
+    },
+    "prioridade": 2,
+    "resolvido_em": null,
+    "responsavel": "Equipe de manutenção",
+    "solicitante": {
+      "nome": "Estudante Exemplo 24",
+      "email": "estudante24@example.com"
+    },
+    "status": "em_manutencao",
+    "tags": [
+      "tecnologia",
+      "demonstração"
+    ],
+    "titulo": "Impressora não conecta"
+  },
+  {
+    "_id": {
+      "$oid": "660000000000000000000017"
+    },
+    "acessibilidade": false,
+    "atualizado_em": {
+      "$date": "2026-11-02T17:00:30.487Z"
+    },
+    "categoria": "Infraestrutura",
+    "criado_em": {
+      "$date": "2026-10-31T11:00:30.487Z"
+    },
+    "custo_estimado": 260.0,
+    "demonstracao": true,
+    "descricao": "Foi identificado o seguinte problema: quadro branco danificado. Local: Sala 102, bloco A. Solicita-se avaliação da equipe responsável. Registro fictício para demonstração acadêmica.",
+    "fotos": [],
+    "historico": [
+      {
+        "status": "aberto",
+        "data": {
+          "$date": "2026-10-31T11:00:30.487Z"
+        },
+        "observacao": "Ocorrência de demonstração criada."
+      },
+      {
+        "status": "resolvido",
+        "data": {
+          "$date": "2026-11-02T17:00:30.487Z"
+        },
+        "observacao": "Atualização de demonstração."
+      }
+    ],
+    "localizacao": {
+      "bloco": "A",
+      "sala": "Sala 102",
+      "andar": 0
+    },
+    "prioridade": 1,
+    "resolvido_em": {
+      "$date": "2026-11-02T17:00:30.487Z"
+    },
+    "responsavel": "Equipe de manutenção",
+    "solicitante": {
+      "nome": "Estudante Exemplo 23",
+      "email": "estudante23@example.com"
+    },
+    "status": "resolvido",
+    "tags": [
+      "infraestrutura",
+      "demonstração"
+    ],
+    "titulo": "Quadro branco danificado"
+  },
+  {
+    "_id": {
+      "$oid": "660000000000000000000016"
+    },
+    "acessibilidade": true,
+    "atualizado_em": {
+      "$date": "2026-10-30T12:00:30.487Z"
+    },
+    "categoria": "Acessibilidade",
+    "criado_em": {
+      "$date": "2026-10-30T12:00:30.487Z"
+    },
+    "custo_estimado": 350.0,
+    "demonstracao": true,
+    "descricao": "Foi identificado o seguinte problema: corrimão solto. Local: Escada principal, bloco E. Solicita-se avaliação da equipe responsável. Registro fictício para demonstração acadêmica.",
+    "fotos": [],
+    "historico": [
+      {
+        "status": "aberto",
+        "data": {
+          "$date": "2026-10-30T12:00:30.487Z"
+        },
+        "observacao": "Ocorrência de demonstração criada."
+      }
+    ],
+    "localizacao": {
+      "bloco": "E",
+      "sala": "Escada principal",
+      "andar": 0
+    },
+    "prioridade": 4,
+    "resolvido_em": null,
+    "responsavel": "",
+    "solicitante": {
+      "nome": "Estudante Exemplo 22",
+      "email": "estudante22@example.com"
+    },
+    "status": "aberto",
+    "tags": [
+      "acessibilidade",
+      "demonstração"
+    ],
+    "titulo": "Corrimão solto"
+  },
+  {
+    "_id": {
+      "$oid": "660000000000000000000015"
+    },
+    "acessibilidade": false,
+    "atualizado_em": {
+      "$date": "2026-10-29T17:00:30.487Z"
+    },
+    "categoria": "Limpeza",
+    "criado_em": {
+      "$date": "2026-10-29T13:00:30.487Z"
+    },
+    "custo_estimado": 0.0,
+    "demonstracao": true,
+    "descricao": "Foi identificado o seguinte problema: acúmulo de resíduos. Local: Entrada lateral, bloco B. Solicita-se avaliação da equipe responsável. Registro fictício para demonstração acadêmica.",
+    "fotos": [],
+    "historico": [
+      {
+        "status": "aberto",
+        "data": {
+          "$date": "2026-10-29T13:00:30.487Z"
+        },
+        "observacao": "Ocorrência de demonstração criada."
+      },
+      {
+        "status": "em_analise",
+        "data": {
+          "$date": "2026-10-29T17:00:30.487Z"
+        },
+        "observacao": "Atualização de demonstração."
+      }
+    ],
+    "localizacao": {
+      "bloco": "B",
+      "sala": "Entrada lateral",
+      "andar": 0
+    },
+    "prioridade": 2,
+    "resolvido_em": null,
+    "responsavel": "Equipe de manutenção",
+    "solicitante": {
+      "nome": "Estudante Exemplo 21",
+      "email": "estudante21@example.com"
+    },
+    "status": "em_analise",
+    "tags": [
+      "limpeza",
+      "demonstração"
+    ],
+    "titulo": "Acúmulo de resíduos"
+  },
+  {
+    "_id": {
+      "$oid": "660000000000000000000014"
+    },
+    "acessibilidade": false,
+    "atualizado_em": {
+      "$date": "2026-10-30T07:00:30.487Z"
+    },
+    "categoria": "Elétrica",
+    "criado_em": {
+      "$date": "2026-10-28T07:00:30.487Z"
+    },
+    "custo_estimado": 110.0,
+    "demonstracao": true,
+    "descricao": "Foi identificado o seguinte problema: luminária piscando. Local: Corredor coberto, bloco D. Solicita-se avaliação da equipe responsável. Registro fictício para demonstração acadêmica.",
+    "fotos": [],
+    "historico": [
+      {
+        "status": "aberto",
+        "data": {
+          "$date": "2026-10-28T07:00:30.487Z"
+        },
+        "observacao": "Ocorrência de demonstração criada."
+      },
+      {
+        "status": "resolvido",
+        "data": {
+          "$date": "2026-10-30T07:00:30.487Z"
+        },
+        "observacao": "Atualização de demonstração."
+      }
+    ],
+    "localizacao": {
+      "bloco": "D",
+      "sala": "Corredor coberto",
+      "andar": 1
+    },
+    "prioridade": 2,
+    "resolvido_em": {
+      "$date": "2026-10-30T07:00:30.487Z"
+    },
+    "responsavel": "Equipe de manutenção",
+    "solicitante": {
+      "nome": "Estudante Exemplo 20",
+      "email": "estudante20@example.com"
+    },
+    "status": "resolvido",
+    "tags": [
+      "elétrica",
+      "demonstração"
+    ],
+    "titulo": "Luminária piscando"
+  },
+  {
+    "_id": {
+      "$oid": "660000000000000000000013"
+    },
+    "acessibilidade": false,
+    "atualizado_em": {
+      "$date": "2026-10-27T08:00:30.487Z"
+    },
+    "categoria": "Hidráulica",
+    "criado_em": {
+      "$date": "2026-10-27T08:00:30.487Z"
+    },
+    "custo_estimado": 190.0,
+    "demonstracao": true,
+    "descricao": "Foi identificado o seguinte problema: entupimento de pia. Local: Copa administrativa, bloco E. Solicita-se avaliação da equipe responsável. Registro fictício para demonstração acadêmica.",
+    "fotos": [],
+    "historico": [
+      {
+        "status": "aberto",
+        "data": {
+          "$date": "2026-10-27T08:00:30.487Z"
+        },
+        "observacao": "Ocorrência de demonstração criada."
+      }
+    ],
+    "localizacao": {
+      "bloco": "E",
+      "sala": "Copa administrativa",
+      "andar": 0
+    },
+    "prioridade": 3,
+    "resolvido_em": null,
+    "responsavel": "",
+    "solicitante": {
+      "nome": "Estudante Exemplo 19",
+      "email": "estudante19@example.com"
+    },
+    "status": "aberto",
+    "tags": [
+      "hidráulica",
+      "demonstração"
+    ],
+    "titulo": "Entupimento de pia"
+  },
+  {
+    "_id": {
+      "$oid": "660000000000000000000012"
+    },
+    "acessibilidade": false,
+    "atualizado_em": {
+      "$date": "2026-10-28T05:00:30.487Z"
+    },
+    "categoria": "Tecnologia",
+    "criado_em": {
+      "$date": "2026-10-26T09:00:30.487Z"
+    },
+    "custo_estimado": 45.0,
+    "demonstracao": true,
+    "descricao": "Foi identificado o seguinte problema: mouse com botão defeituoso. Local: Laboratório 04, bloco B. Solicita-se avaliação da equipe responsável. Registro fictício para demonstração acadêmica.",
+    "fotos": [],
+    "historico": [
+      {
+        "status": "aberto",
+        "data": {
+          "$date": "2026-10-26T09:00:30.487Z"
+        },
+        "observacao": "Ocorrência de demonstração criada."
+      },
+      {
+        "status": "resolvido",
+        "data": {
+          "$date": "2026-10-28T05:00:30.487Z"
+        },
+        "observacao": "Atualização de demonstração."
+      }
+    ],
+    "localizacao": {
+      "bloco": "B",
+      "sala": "Laboratório 04",
+      "andar": 0
+    },
+    "prioridade": 1,
+    "resolvido_em": {
+      "$date": "2026-10-28T05:00:30.487Z"
+    },
+    "responsavel": "Equipe de manutenção",
+    "solicitante": {
+      "nome": "Estudante Exemplo 18",
+      "email": "estudante18@example.com"
+    },
+    "status": "resolvido",
+    "tags": [
+      "tecnologia",
+      "demonstração"
+    ],
+    "titulo": "Mouse com botão defeituoso"
+  },
+  {
+    "_id": {
+      "$oid": "660000000000000000000011"
+    },
+    "acessibilidade": false,
+    "atualizado_em": {
+      "$date": "2026-10-25T14:00:30.487Z"
+    },
+    "categoria": "Infraestrutura",
+    "criado_em": {
+      "$date": "2026-10-25T10:00:30.487Z"
+    },
+    "custo_estimado": 1200.0,
+    "demonstracao": true,
+    "descricao": "Foi identificado o seguinte problema: infiltração no teto. Local: Acervo, bloco C. Solicita-se avaliação da equipe responsável. Registro fictício para demonstração acadêmica.",
+    "fotos": [],
+    "historico": [
+      {
+        "status": "aberto",
+        "data": {
+          "$date": "2026-10-25T10:00:30.487Z"
+        },
+        "observacao": "Ocorrência de demonstração criada."
+      },
+      {
+        "status": "em_analise",
+        "data": {
+          "$date": "2026-10-25T14:00:30.487Z"
+        },
+        "observacao": "Atualização de demonstração."
+      }
+    ],
+    "localizacao": {
+      "bloco": "C",
+      "sala": "Acervo",
+      "andar": 0
+    },
+    "prioridade": 4,
+    "resolvido_em": null,
+    "responsavel": "Equipe de manutenção",
+    "solicitante": {
+      "nome": "Estudante Exemplo 17",
+      "email": "estudante17@example.com"
+    },
+    "status": "em_analise",
+    "tags": [
+      "infraestrutura",
+      "demonstração"
+    ],
+    "titulo": "Infiltração no teto"
+  },
+  {
+    "_id": {
+      "$oid": "660000000000000000000010"
+    },
+    "acessibilidade": true,
+    "atualizado_em": {
+      "$date": "2026-10-24T15:00:30.487Z"
+    },
+    "categoria": "Acessibilidade",
+    "criado_em": {
+      "$date": "2026-10-24T11:00:30.487Z"
+    },
+    "custo_estimado": 480.0,
+    "demonstracao": true,
+    "descricao": "Foi identificado o seguinte problema: elevador sem sinal sonoro. Local: Hall do elevador, bloco A. Solicita-se avaliação da equipe responsável. Registro fictício para demonstração acadêmica.",
+    "fotos": [],
+    "historico": [
+      {
+        "status": "aberto",
+        "data": {
+          "$date": "2026-10-24T11:00:30.487Z"
+        },
+        "observacao": "Ocorrência de demonstração criada."
+      },
+      {
+        "status": "em_manutencao",
+        "data": {
+          "$date": "2026-10-24T15:00:30.487Z"
+        },
+        "observacao": "Atualização de demonstração."
+      }
+    ],
+    "localizacao": {
+      "bloco": "A",
+      "sala": "Hall do elevador",
+      "andar": 1
+    },
+    "prioridade": 3,
+    "resolvido_em": null,
+    "responsavel": "Equipe de manutenção",
+    "solicitante": {
+      "nome": "Estudante Exemplo 16",
+      "email": "estudante16@example.com"
+    },
+    "status": "em_manutencao",
+    "tags": [
+      "acessibilidade",
+      "demonstração"
+    ],
+    "titulo": "Elevador sem sinal sonoro"
+  },
+  {
+    "_id": {
+      "$oid": "66000000000000000000000f"
+    },
+    "acessibilidade": false,
+    "atualizado_em": {
+      "$date": "2026-10-25T02:00:30.487Z"
+    },
+    "categoria": "Limpeza",
+    "criado_em": {
+      "$date": "2026-10-23T12:00:30.487Z"
+    },
+    "custo_estimado": 0.0,
+    "demonstracao": true,
+    "descricao": "Foi identificado o seguinte problema: limpeza da área externa. Local: Jardim central, bloco D. Solicita-se avaliação da equipe responsável. Registro fictício para demonstração acadêmica.",
+    "fotos": [],
+    "historico": [
+      {
+        "status": "aberto",
+        "data": {
+          "$date": "2026-10-23T12:00:30.487Z"
+        },
+        "observacao": "Ocorrência de demonstração criada."
+      },
+      {
+        "status": "resolvido",
+        "data": {
+          "$date": "2026-10-25T02:00:30.487Z"
+        },
+        "observacao": "Atualização de demonstração."
+      }
+    ],
+    "localizacao": {
+      "bloco": "D",
+      "sala": "Jardim central",
+      "andar": 0
+    },
+    "prioridade": 1,
+    "resolvido_em": {
+      "$date": "2026-10-25T02:00:30.487Z"
+    },
+    "responsavel": "Equipe de manutenção",
+    "solicitante": {
+      "nome": "Estudante Exemplo 15",
+      "email": "estudante15@example.com"
+    },
+    "status": "resolvido",
+    "tags": [
+      "limpeza",
+      "demonstração"
+    ],
+    "titulo": "Limpeza da área externa"
+  },
+  {
+    "_id": {
+      "$oid": "66000000000000000000000e"
+    },
+    "acessibilidade": false,
+    "atualizado_em": {
+      "$date": "2026-10-22T17:00:30.487Z"
+    },
+    "categoria": "Elétrica",
+    "criado_em": {
+      "$date": "2026-10-22T13:00:30.487Z"
+    },
+    "custo_estimado": 160.0,
+    "demonstracao": true,
+    "descricao": "Foi identificado o seguinte problema: interruptor com mau contato. Local: Secretaria, bloco E. Solicita-se avaliação da equipe responsável. Registro fictício para demonstração acadêmica.",
+    "fotos": [],
+    "historico": [
+      {
+        "status": "aberto",
+        "data": {
+          "$date": "2026-10-22T13:00:30.487Z"
+        },
+        "observacao": "Ocorrência de demonstração criada."
+      },
+      {
+        "status": "em_analise",
+        "data": {
+          "$date": "2026-10-22T17:00:30.487Z"
+        },
+        "observacao": "Atualização de demonstração."
+      }
+    ],
+    "localizacao": {
+      "bloco": "E",
+      "sala": "Secretaria",
+      "andar": 0
+    },
+    "prioridade": 4,
+    "resolvido_em": null,
+    "responsavel": "Equipe de manutenção",
+    "solicitante": {
+      "nome": "Estudante Exemplo 14",
+      "email": "estudante14@example.com"
+    },
+    "status": "em_analise",
+    "tags": [
+      "elétrica",
+      "demonstração"
+    ],
+    "titulo": "Interruptor com mau contato"
+  },
+  {
+    "_id": {
+      "$oid": "66000000000000000000000d"
+    },
+    "acessibilidade": false,
+    "atualizado_em": {
+      "$date": "2026-10-21T07:00:30.487Z"
+    },
+    "categoria": "Infraestrutura",
+    "criado_em": {
+      "$date": "2026-10-21T07:00:30.487Z"
+    },
+    "custo_estimado": 130.0,
+    "demonstracao": true,
+    "descricao": "Foi identificado o seguinte problema: cadeira com encosto quebrado. Local: Sala 203, bloco A. Solicita-se avaliação da equipe responsável. Registro fictício para demonstração acadêmica.",
+    "fotos": [],
+    "historico": [
+      {
+        "status": "aberto",
+        "data": {
+          "$date": "2026-10-21T07:00:30.487Z"
+        },
+        "observacao": "Ocorrência de demonstração criada."
+      }
+    ],
+    "localizacao": {
+      "bloco": "A",
+      "sala": "Sala 203",
+      "andar": 0
+    },
+    "prioridade": 2,
+    "resolvido_em": null,
+    "responsavel": "",
+    "solicitante": {
+      "nome": "Estudante Exemplo 13",
+      "email": "estudante13@example.com"
+    },
+    "status": "aberto",
+    "tags": [
+      "infraestrutura",
+      "demonstração"
+    ],
+    "titulo": "Cadeira com encosto quebrado"
+  },
+  {
+    "_id": {
+      "$oid": "66000000000000000000000c"
+    },
+    "acessibilidade": false,
+    "atualizado_em": {
+      "$date": "2026-10-20T12:00:30.487Z"
+    },
+    "categoria": "Tecnologia",
+    "criado_em": {
+      "$date": "2026-10-20T08:00:30.487Z"
+    },
+    "custo_estimado": 320.0,
+    "demonstracao": true,
+    "descricao": "Foi identificado o seguinte problema: wi-fi instável na biblioteca. Local: Sala de estudo, bloco C. Solicita-se avaliação da equipe responsável. Registro fictício para demonstração acadêmica.",
+    "fotos": [],
+    "historico": [
+      {
+        "status": "aberto",
+        "data": {
+          "$date": "2026-10-20T08:00:30.487Z"
+        },
+        "observacao": "Ocorrência de demonstração criada."
+      },
+      {
+        "status": "em_manutencao",
+        "data": {
+          "$date": "2026-10-20T12:00:30.487Z"
+        },
+        "observacao": "Atualização de demonstração."
+      }
+    ],
+    "localizacao": {
+      "bloco": "C",
+      "sala": "Sala de estudo",
+      "andar": 1
+    },
+    "prioridade": 3,
+    "resolvido_em": null,
+    "responsavel": "Equipe de manutenção",
+    "solicitante": {
+      "nome": "Estudante Exemplo 12",
+      "email": "estudante12@example.com"
+    },
+    "status": "em_manutencao",
+    "tags": [
+      "tecnologia",
+      "demonstração"
+    ],
+    "titulo": "Wi-Fi instável na biblioteca"
+  },
+  {
+    "_id": {
+      "$oid": "66000000000000000000000b"
+    },
+    "acessibilidade": false,
+    "atualizado_em": {
+      "$date": "2026-10-20T15:00:30.487Z"
+    },
+    "categoria": "Hidráulica",
+    "criado_em": {
+      "$date": "2026-10-19T09:00:30.487Z"
+    },
+    "custo_estimado": 75.0,
+    "demonstracao": true,
+    "descricao": "Foi identificado o seguinte problema: torneira pingando. Local: Copa, bloco D. Solicita-se avaliação da equipe responsável. Registro fictício para demonstração acadêmica.",
+    "fotos": [],
+    "historico": [
+      {
+        "status": "aberto",
+        "data": {
+          "$date": "2026-10-19T09:00:30.487Z"
+        },
+        "observacao": "Ocorrência de demonstração criada."
+      },
+      {
+        "status": "resolvido",
+        "data": {
+          "$date": "2026-10-20T15:00:30.487Z"
+        },
+        "observacao": "Atualização de demonstração."
+      }
+    ],
+    "localizacao": {
+      "bloco": "D",
+      "sala": "Copa",
+      "andar": 0
+    },
+    "prioridade": 2,
+    "resolvido_em": {
+      "$date": "2026-10-20T15:00:30.487Z"
+    },
+    "responsavel": "Equipe de manutenção",
+    "solicitante": {
+      "nome": "Estudante Exemplo 11",
+      "email": "estudante11@example.com"
+    },
+    "status": "resolvido",
+    "tags": [
+      "hidráulica",
+      "demonstração"
+    ],
+    "titulo": "Torneira pingando"
+  },
+  {
+    "_id": {
+      "$oid": "66000000000000000000000a"
+    },
+    "acessibilidade": true,
+    "atualizado_em": {
+      "$date": "2026-10-18T10:00:30.487Z"
+    },
+    "categoria": "Acessibilidade",
+    "criado_em": {
+      "$date": "2026-10-18T10:00:30.487Z"
+    },
+    "custo_estimado": 220.0,
+    "demonstracao": true,
+    "descricao": "Foi identificado o seguinte problema: sinalização tátil descolada. Local: Entrada da biblioteca, bloco C. Solicita-se avaliação da equipe responsável. Registro fictício para demonstração acadêmica.",
+    "fotos": [],
+    "historico": [
+      {
+        "status": "aberto",
+        "data": {
+          "$date": "2026-10-18T10:00:30.487Z"
+        },
+        "observacao": "Ocorrência de demonstração criada."
+      }
+    ],
+    "localizacao": {
+      "bloco": "C",
+      "sala": "Entrada da biblioteca",
+      "andar": 0
+    },
+    "prioridade": 3,
+    "resolvido_em": null,
+    "responsavel": "",
+    "solicitante": {
+      "nome": "Estudante Exemplo 10",
+      "email": "estudante10@example.com"
+    },
+    "status": "aberto",
+    "tags": [
+      "acessibilidade",
+      "demonstração"
+    ],
+    "titulo": "Sinalização tátil descolada"
+  },
+  {
+    "_id": {
+      "$oid": "660000000000000000000009"
+    },
+    "acessibilidade": false,
+    "atualizado_em": {
+      "$date": "2026-10-18T13:00:30.487Z"
+    },
+    "categoria": "Infraestrutura",
+    "criado_em": {
+      "$date": "2026-10-17T11:00:30.487Z"
+    },
+    "custo_estimado": 180.0,
+    "demonstracao": true,
+    "descricao": "Foi identificado o seguinte problema: porta do banheiro travando. Local: Banheiro térreo, bloco E. Solicita-se avaliação da equipe responsável. Registro fictício para demonstração acadêmica.",
+    "fotos": [],
+    "historico": [
+      {
+        "status": "aberto",
+        "data": {
+          "$date": "2026-10-17T11:00:30.487Z"
+        },
+        "observacao": "Ocorrência de demonstração criada."
+      },
+      {
+        "status": "resolvido",
+        "data": {
+          "$date": "2026-10-18T13:00:30.487Z"
+        },
+        "observacao": "Atualização de demonstração."
+      }
+    ],
+    "localizacao": {
+      "bloco": "E",
+      "sala": "Banheiro térreo",
+      "andar": 0
+    },
+    "prioridade": 2,
+    "resolvido_em": {
+      "$date": "2026-10-18T13:00:30.487Z"
+    },
+    "responsavel": "Equipe de manutenção",
+    "solicitante": {
+      "nome": "Estudante Exemplo 09",
+      "email": "estudante09@example.com"
+    },
+    "status": "resolvido",
+    "tags": [
+      "infraestrutura",
+      "demonstração"
+    ],
+    "titulo": "Porta do banheiro travando"
+  },
+  {
+    "_id": {
+      "$oid": "660000000000000000000008"
+    },
+    "acessibilidade": false,
+    "atualizado_em": {
+      "$date": "2026-10-16T16:00:30.487Z"
+    },
+    "categoria": "Tecnologia",
+    "criado_em": {
+      "$date": "2026-10-16T12:00:30.487Z"
+    },
+    "custo_estimado": 540.0,
+    "demonstracao": true,
+    "descricao": "Foi identificado o seguinte problema: computador não inicializa. Local: Laboratório 03, bloco B. Solicita-se avaliação da equipe responsável. Registro fictício para demonstração acadêmica.",
+    "fotos": [],
+    "historico": [
+      {
+        "status": "aberto",
+        "data": {
+          "$date": "2026-10-16T12:00:30.487Z"
+        },
+        "observacao": "Ocorrência de demonstração criada."
+      },
+      {
+        "status": "em_analise",
+        "data": {
+          "$date": "2026-10-16T16:00:30.487Z"
+        },
+        "observacao": "Atualização de demonstração."
+      }
+    ],
+    "localizacao": {
+      "bloco": "B",
+      "sala": "Laboratório 03",
+      "andar": 1
+    },
+    "prioridade": 3,
+    "resolvido_em": null,
+    "responsavel": "Equipe de manutenção",
+    "solicitante": {
+      "nome": "Estudante Exemplo 08",
+      "email": "estudante08@example.com"
+    },
+    "status": "em_analise",
+    "tags": [
+      "tecnologia",
+      "demonstração"
+    ],
+    "titulo": "Computador não inicializa"
+  },
+  {
+    "_id": {
+      "$oid": "660000000000000000000007"
+    },
+    "acessibilidade": false,
+    "atualizado_em": {
+      "$date": "2026-10-15T13:00:30.487Z"
+    },
+    "categoria": "Limpeza",
+    "criado_em": {
+      "$date": "2026-10-15T13:00:30.487Z"
+    },
+    "custo_estimado": 150.0,
+    "demonstracao": true,
+    "descricao": "Foi identificado o seguinte problema: lixeira danificada. Local: Área de alimentação, bloco D. Solicita-se avaliação da equipe responsável. Registro fictício para demonstração acadêmica.",
+    "fotos": [],
+    "historico": [
+      {
+        "status": "aberto",
+        "data": {
+          "$date": "2026-10-15T13:00:30.487Z"
+        },
+        "observacao": "Ocorrência de demonstração criada."
+      }
+    ],
+    "localizacao": {
+      "bloco": "D",
+      "sala": "Área de alimentação",
+      "andar": 0
+    },
+    "prioridade": 1,
+    "resolvido_em": null,
+    "responsavel": "",
+    "solicitante": {
+      "nome": "Estudante Exemplo 07",
+      "email": "estudante07@example.com"
+    },
+    "status": "aberto",
+    "tags": [
+      "limpeza",
+      "demonstração"
+    ],
+    "titulo": "Lixeira danificada"
+  },
+  {
+    "_id": {
+      "$oid": "660000000000000000000006"
+    },
+    "acessibilidade": false,
+    "atualizado_em": {
+      "$date": "2026-10-14T11:00:30.487Z"
+    },
+    "categoria": "Infraestrutura",
+    "criado_em": {
+      "$date": "2026-10-14T07:00:30.487Z"
+    },
+    "custo_estimado": 380.0,
+    "demonstracao": true,
+    "descricao": "Foi identificado o seguinte problema: ar-condicionado com ruído. Local: Laboratório 01, bloco B. Solicita-se avaliação da equipe responsável. Registro fictício para demonstração acadêmica.",
+    "fotos": [],
+    "historico": [
+      {
+        "status": "aberto",
+        "data": {
+          "$date": "2026-10-14T07:00:30.487Z"
+        },
+        "observacao": "Ocorrência de demonstração criada."
+      },
+      {
+        "status": "em_manutencao",
+        "data": {
+          "$date": "2026-10-14T11:00:30.487Z"
+        },
+        "observacao": "Atualização de demonstração."
+      }
+    ],
+    "localizacao": {
+      "bloco": "B",
+      "sala": "Laboratório 01",
+      "andar": 0
+    },
+    "prioridade": 2,
+    "resolvido_em": null,
+    "responsavel": "Equipe de manutenção",
+    "solicitante": {
+      "nome": "Estudante Exemplo 06",
+      "email": "estudante06@example.com"
+    },
+    "status": "em_manutencao",
+    "tags": [
+      "infraestrutura",
+      "demonstração"
+    ],
+    "titulo": "Ar-condicionado com ruído"
+  },
+  {
+    "_id": {
+      "$oid": "660000000000000000000005"
+    },
+    "acessibilidade": false,
+    "atualizado_em": {
+      "$date": "2026-10-14T02:00:30.487Z"
+    },
+    "categoria": "Elétrica",
+    "criado_em": {
+      "$date": "2026-10-13T08:00:30.487Z"
+    },
+    "custo_estimado": 90.0,
+    "demonstracao": true,
+    "descricao": "Foi identificado o seguinte problema: tomada sem funcionamento. Local: Sala 105, bloco A. Solicita-se avaliação da equipe responsável. Registro fictício para demonstração acadêmica.",
+    "fotos": [],
+    "historico": [
+      {
+        "status": "aberto",
+        "data": {
+          "$date": "2026-10-13T08:00:30.487Z"
+        },
+        "observacao": "Ocorrência de demonstração criada."
+      },
+      {
+        "status": "resolvido",
+        "data": {
+          "$date": "2026-10-14T02:00:30.487Z"
+        },
+        "observacao": "Atualização de demonstração."
+      }
+    ],
+    "localizacao": {
+      "bloco": "A",
+      "sala": "Sala 105",
+      "andar": 0
+    },
+    "prioridade": 2,
+    "resolvido_em": {
+      "$date": "2026-10-14T02:00:30.487Z"
+    },
+    "responsavel": "Equipe de manutenção",
+    "solicitante": {
+      "nome": "Estudante Exemplo 05",
+      "email": "estudante05@example.com"
+    },
+    "status": "resolvido",
+    "tags": [
+      "elétrica",
+      "demonstração"
+    ],
+    "titulo": "Tomada sem funcionamento"
+  },
+  {
+    "_id": {
+      "$oid": "660000000000000000000004"
+    },
+    "acessibilidade": true,
+    "atualizado_em": {
+      "$date": "2026-10-12T09:00:30.487Z"
+    },
+    "categoria": "Acessibilidade",
+    "criado_em": {
+      "$date": "2026-10-12T09:00:30.487Z"
+    },
+    "custo_estimado": 650.0,
+    "demonstracao": true,
+    "descricao": "Foi identificado o seguinte problema: rampa com piso solto. Local: Entrada principal, bloco D. Solicita-se avaliação da equipe responsável. Registro fictício para demonstração acadêmica.",
+    "fotos": [],
+    "historico": [
+      {
+        "status": "aberto",
+        "data": {
+          "$date": "2026-10-12T09:00:30.487Z"
+        },
+        "observacao": "Ocorrência de demonstração criada."
+      }
+    ],
+    "localizacao": {
+      "bloco": "D",
+      "sala": "Entrada principal",
+      "andar": 1
+    },
+    "prioridade": 4,
+    "resolvido_em": null,
+    "responsavel": "",
+    "solicitante": {
+      "nome": "Estudante Exemplo 04",
+      "email": "estudante04@example.com"
+    },
+    "status": "aberto",
+    "tags": [
+      "acessibilidade",
+      "demonstração"
+    ],
+    "titulo": "Rampa com piso solto"
+  },
+  {
+    "_id": {
+      "$oid": "660000000000000000000003"
+    },
+    "acessibilidade": false,
+    "atualizado_em": {
+      "$date": "2026-10-11T14:00:30.487Z"
+    },
+    "categoria": "Elétrica",
+    "criado_em": {
+      "$date": "2026-10-11T10:00:30.487Z"
+    },
+    "custo_estimado": 120.0,
+    "demonstracao": true,
+    "descricao": "Foi identificado o seguinte problema: lâmpadas apagadas na leitura. Local: Sala de leitura, bloco C. Solicita-se avaliação da equipe responsável. Registro fictício para demonstração acadêmica.",
+    "fotos": [],
+    "historico": [
+      {
+        "status": "aberto",
+        "data": {
+          "$date": "2026-10-11T10:00:30.487Z"
+        },
+        "observacao": "Ocorrência de demonstração criada."
+      },
+      {
+        "status": "em_analise",
+        "data": {
+          "$date": "2026-10-11T14:00:30.487Z"
+        },
+        "observacao": "Atualização de demonstração."
+      }
+    ],
+    "localizacao": {
+      "bloco": "C",
+      "sala": "Sala de leitura",
+      "andar": 0
+    },
+    "prioridade": 2,
+    "resolvido_em": null,
+    "responsavel": "Equipe de manutenção",
+    "solicitante": {
+      "nome": "Estudante Exemplo 03",
+      "email": "estudante03@example.com"
+    },
+    "status": "em_analise",
+    "tags": [
+      "elétrica",
+      "demonstração"
+    ],
+    "titulo": "Lâmpadas apagadas na leitura"
+  },
+  {
+    "_id": {
+      "$oid": "660000000000000000000002"
+    },
+    "acessibilidade": false,
+    "atualizado_em": {
+      "$date": "2026-10-10T15:00:30.487Z"
+    },
+    "categoria": "Hidráulica",
+    "criado_em": {
+      "$date": "2026-10-10T11:00:30.487Z"
+    },
+    "custo_estimado": 280.0,
+    "demonstracao": true,
+    "descricao": "Foi identificado o seguinte problema: vazamento no bebedouro. Local: Corredor térreo, bloco A. Solicita-se avaliação da equipe responsável. Registro fictício para demonstração acadêmica.",
+    "fotos": [],
+    "historico": [
+      {
+        "status": "aberto",
+        "data": {
+          "$date": "2026-10-10T11:00:30.487Z"
+        },
+        "observacao": "Ocorrência de demonstração criada."
+      },
+      {
+        "status": "em_manutencao",
+        "data": {
+          "$date": "2026-10-10T15:00:30.487Z"
+        },
+        "observacao": "Atualização de demonstração."
+      }
+    ],
+    "localizacao": {
+      "bloco": "A",
+      "sala": "Corredor térreo",
+      "andar": 0
+    },
+    "prioridade": 4,
+    "resolvido_em": null,
+    "responsavel": "Equipe de manutenção",
+    "solicitante": {
+      "nome": "Estudante Exemplo 02",
+      "email": "estudante02@example.com"
+    },
+    "status": "em_manutencao",
+    "tags": [
+      "hidráulica",
+      "demonstração"
+    ],
+    "titulo": "Vazamento no bebedouro"
+  },
+  {
+    "_id": {
+      "$oid": "660000000000000000000001"
+    },
+    "acessibilidade": false,
+    "atualizado_em": {
+      "$date": "2026-10-09T12:00:30.487Z"
+    },
+    "categoria": "Tecnologia",
+    "criado_em": {
+      "$date": "2026-10-09T12:00:30.487Z"
+    },
+    "custo_estimado": 450.0,
+    "demonstracao": true,
+    "descricao": "Foi identificado o seguinte problema: projetor sem imagem. Local: Laboratório 02, bloco B. Solicita-se avaliação da equipe responsável. Registro fictício para demonstração acadêmica.",
+    "fotos": [],
+    "historico": [
+      {
+        "status": "aberto",
+        "data": {
+          "$date": "2026-10-09T12:00:30.487Z"
+        },
+        "observacao": "Ocorrência de demonstração criada."
+      }
+    ],
+    "localizacao": {
+      "bloco": "B",
+      "sala": "Laboratório 02",
+      "andar": 0
+    },
+    "prioridade": 3,
+    "resolvido_em": null,
+    "responsavel": "",
+    "solicitante": {
+      "nome": "Estudante Exemplo 01",
+      "email": "estudante01@example.com"
+    },
+    "status": "aberto",
+    "tags": [
+      "tecnologia",
+      "demonstração"
+    ],
+    "titulo": "Projetor sem imagem"
+  }
+]

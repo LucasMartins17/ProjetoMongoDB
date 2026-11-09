@@ -1,0 +1,10 @@
+[
+  {
+    "_id": "initialization-v1",
+    "criado_em": {
+      "$date": "2026-11-09T13:00:30.496Z"
+    },
+    "descricao": "Inicialização concluída; não repor exemplos excluídos.",
+    "versao": 1
+  }
+]

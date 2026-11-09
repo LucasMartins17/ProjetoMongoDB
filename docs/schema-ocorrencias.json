@@ -1,0 +1,172 @@
+{
+  "$jsonSchema": {
+    "bsonType": "object",
+    "required": [
+      "titulo",
+      "descricao",
+      "categoria",
+      "localizacao",
+      "prioridade",
+      "status",
+      "solicitante",
+      "responsavel",
+      "tags",
+      "fotos",
+      "custo_estimado",
+      "acessibilidade",
+      "criado_em",
+      "atualizado_em",
+      "resolvido_em",
+      "historico",
+      "demonstracao"
+    ],
+    "properties": {
+      "titulo": {
+        "bsonType": "string",
+        "minLength": 5,
+        "maxLength": 120
+      },
+      "descricao": {
+        "bsonType": "string",
+        "minLength": 10,
+        "maxLength": 3000
+      },
+      "categoria": {
+        "enum": [
+          "Infraestrutura",
+          "Elétrica",
+          "Tecnologia",
+          "Hidráulica",
+          "Limpeza",
+          "Acessibilidade"
+        ]
+      },
+      "localizacao": {
+        "bsonType": "object",
+        "required": [
+          "bloco",
+          "sala",
+          "andar"
+        ],
+        "properties": {
+          "bloco": {
+            "enum": [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E"
+            ]
+          },
+          "sala": {
+            "bsonType": "string"
+          },
+          "andar": {
+            "bsonType": "int",
+            "minimum": 0,
+            "maximum": 10
+          }
+        }
+      },
+      "prioridade": {
+        "bsonType": "int",
+        "minimum": 1,
+        "maximum": 4
+      },
+      "status": {
+        "enum": [
+          "aberto",
+          "em_analise",
+          "em_manutencao",
+          "resolvido"
+        ]
+      },
+      "solicitante": {
+        "bsonType": "object",
+        "required": [
+          "nome",
+          "email"
+        ],
+        "properties": {
+          "nome": {
+            "bsonType": "string"
+          },
+          "email": {
+            "bsonType": "string"
+          }
+        }
+      },
+      "responsavel": {
+        "bsonType": "string"
+      },
+      "tags": {
+        "bsonType": "array",
+        "items": {
+          "bsonType": "string"
+        },
+        "maxItems": 8
+      },
+      "fotos": {
+        "bsonType": "array",
+        "items": {
+          "bsonType": "string"
+        },
+        "maxItems": 3
+      },
+      "custo_estimado": {
+        "bsonType": [
+          "double",
+          "int",
+          "long",
+          "decimal"
+        ],
+        "minimum": 0
+      },
+      "acessibilidade": {
+        "bsonType": "bool"
+      },
+      "criado_em": {
+        "bsonType": "date"
+      },
+      "atualizado_em": {
+        "bsonType": "date"
+      },
+      "resolvido_em": {
+        "bsonType": [
+          "date",
+          "null"
+        ]
+      },
+      "historico": {
+        "bsonType": "array",
+        "items": {
+          "bsonType": "object",
+          "required": [
+            "status",
+            "data",
+            "observacao"
+          ],
+          "properties": {
+            "status": {
+              "enum": [
+                "aberto",
+                "em_analise",
+                "em_manutencao",
+                "resolvido"
+              ]
+            },
+            "data": {
+              "bsonType": "date"
+            },
+            "observacao": {
+              "bsonType": "string"
+            }
+          }
+        }
+      },
+      "demonstracao": {
+        "bsonType": "bool"
+      }
+    }
+  }
+}
