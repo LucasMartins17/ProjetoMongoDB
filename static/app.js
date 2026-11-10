@@ -110,6 +110,11 @@ async function checkConnection() {
 }
 
 function renderDashboard(data) {
+  const urgent = data.urgentes > 0;
+  $("#attention-title").textContent = urgent ? `${data.urgentes} ${data.urgentes === 1 ? "urgência pede" : "urgências pedem"} atenção.` : "Tudo em dia nas urgências.";
+  $("#attention-description").textContent = urgent ? "Veja os registros de prioridade urgente e acompanhe a situação de cada um." : "Continue acompanhando as solicitações e as melhorias do campus.";
+  $("#attention-action").dataset.quick = urgent ? "urgent" : "all";
+  $("#attention-action").innerHTML = `${urgent ? "Ver urgências" : "Ver ocorrências"}${icon("arrow")}`;
   $("#stat-total").textContent = data.total;
   $("#stat-pending").textContent = data.pendentes;
   $("#stat-urgent").textContent = data.urgentes;
@@ -148,10 +153,40 @@ function renderList(data) {
   $("#next-page").disabled = data.pagina >= data.paginas;
 }
 
+function syncQuickFilters() {
+  const form = $("#filter-form");
+  const status = $("#filter-status").value;
+  const priority = $("#filter-priority").value;
+  const other = ["busca", "bloco", "categoria"].some(name => form.elements.namedItem(name).value);
+  $$(".quick-filter").forEach(button => {
+    const key = button.dataset.quick;
+    const selected = !other && (key === "urgent" ? priority === "4" && !status : key === "all" ? !status && !priority : key === status && !priority);
+    button.classList.toggle("active", selected);
+    button.setAttribute("aria-pressed", String(selected));
+  });
+}
+
 async function loadList() {
   const id = ++state.listId;
-  const result = await api(`/api/ocorrencias?${filterParams()}`);
-  if (id === state.listId && state.connected) renderList(result);
+  const card = $(".list-card");
+  card.setAttribute("aria-busy", "true");
+  syncQuickFilters();
+  try {
+    const result = await api(`/api/ocorrencias?${filterParams()}`);
+    if (id === state.listId && state.connected) renderList(result);
+  } finally {
+    if (id === state.listId) card.setAttribute("aria-busy", "false");
+  }
+}
+
+function quickFilter(key) {
+  clearTimeout(searchTimer);
+  $("#filter-form").reset();
+  if (key === "urgent") $("#filter-priority").value = "4";
+  else if (key !== "all") $("#filter-status").value = key;
+  state.page = 1;
+  if (location.hash === "#ocorrencias") loadList().catch(report);
+  else location.hash = "ocorrencias";
 }
 
 async function refreshAll() {
@@ -204,9 +239,9 @@ function switchView(load = true) {
     if (selected) element.setAttribute("aria-current", "page"); else element.removeAttribute("aria-current");
   });
   const labels = {
-    overview: ["Visão geral", "GESTÃO COLABORATIVA", "Um campus cuidado por todos", "Problemas visíveis. Soluções em movimento. Acompanhe o que acontece por aqui."],
-    occurrences: ["Ocorrências", "DA IDENTIFICAÇÃO À SOLUÇÃO", "Cada registro faz a diferença", "Encontre ocorrências, acompanhe o atendimento e mantenha a comunidade informada."],
-    queries: ["Consultas e indicadores", "DADOS QUE ORIENTAM O CUIDADO", "Entender para transformar", "Explore os dados reais do campus e veja as consultas que dão vida aos indicadores."]
+    overview: ["Visão geral", "OBSERVAR. REGISTRAR. RESOLVER.", "O campus em movimento", "Uma visão do que precisa de atenção e do que já mudou por aqui."],
+    occurrences: ["Ocorrências", "DA IDENTIFICAÇÃO À SOLUÇÃO", "De olho em cada detalhe", "Encontre ocorrências, acompanhe o atendimento e mantenha a comunidade informada."],
+    queries: ["Consultas e indicadores", "DADOS QUE ORIENTAM O CUIDADO", "Os dados contam a história", "Explore os dados reais do campus e veja as consultas que dão vida aos indicadores."]
   };
   const [breadcrumb, eyebrow, title, description] = labels[state.view];
   $("#breadcrumb-current").textContent = breadcrumb;
@@ -225,6 +260,7 @@ function selectBlock(block) {
 
 function prepareForm() {
   $("#occurrence-form").reset();
+  $(".optional-details").open = false;
   $("#form-error").hidden = true;
   $("#form-error").textContent = "";
   $("#history-list").replaceChildren();
@@ -282,6 +318,7 @@ async function openOccurrence(id) {
   $("#history-section").hidden = false;
   $("#history-list").innerHTML = documentData.historico.map(event => `<li><div><strong>${escapeHTML(statusLabels[event.status] || event.status)}</strong><time datetime="${escapeHTML(event.data)}">${friendlyDate(event.data, true)}</time><small>${escapeHTML(event.observacao)}</small></div></li>`).join("");
   $("#record-meta").textContent = `ID: ${documentData._id} · ${documentData.demonstracao ? "Registro fictício de demonstração" : "Registro da comunidade"} · Atualizado em ${friendlyDate(documentData.atualizado_em, true)}`;
+  $(".optional-details").open = Boolean(documentData.fotos.length || documentData.tags.length || documentData.custo_estimado);
   renderPhotos(documentData.fotos);
   $("#occurrence-dialog").showModal();
 }
@@ -307,6 +344,7 @@ async function saveOccurrence(event) {
   const id = state.editDoc?._id;
   state.saving = true;
   $("#save-occurrence").disabled = true;
+  $("#save-occurrence").textContent = "Salvando…";
   $("#form-error").hidden = true;
   try {
     await api(`/api/ocorrencias${id ? `/${id}` : ""}`, { method: editing ? "PUT" : "POST", body: JSON.stringify(formPayload()) });
@@ -318,11 +356,13 @@ async function saveOccurrence(event) {
     if (!error.silent) {
       $("#form-error").textContent = error.message;
       $("#form-error").hidden = false;
+      $("#form-error").focus();
       $("#form-error").scrollIntoView({ block: "center", behavior: "smooth" });
     }
   } finally {
     state.saving = false;
     $("#save-occurrence").disabled = false;
+    $("#save-occurrence").innerHTML = `${editing ? "Salvar alterações" : "Cadastrar ocorrência"}${icon(editing ? "check" : "arrow")}`;
   }
 }
 
@@ -373,6 +413,7 @@ document.addEventListener("click", event => {
   if (target.dataset.action === "new") openNew().catch(report);
   if (target.dataset.open) openOccurrence(target.dataset.open).catch(report);
   if (target.dataset.block) selectBlock(target.dataset.block);
+  if (target.dataset.quick) quickFilter(target.dataset.quick);
   if (target.dataset.close && !state.saving) document.getElementById(target.dataset.close).close();
   if (target.classList.contains("export-button")) exportJSON(target);
 });
@@ -391,7 +432,7 @@ $("#clear-filters").addEventListener("click", () => { clearTimeout(searchTimer);
 $("#previous-page").addEventListener("click", () => { if (state.page > 1) { state.page -= 1; loadList().catch(report); } });
 $("#next-page").addEventListener("click", () => { if (state.page < state.pages) { state.page += 1; loadList().catch(report); } });
 $("#query-block").addEventListener("change", () => loadQueries().catch(report));
-window.addEventListener("hashchange", () => switchView());
+window.addEventListener("hashchange", () => { switchView(); $("#main-content").focus({ preventScroll: true }); window.scrollTo({ top: 0, behavior: "instant" }); });
 window.addEventListener("focus", () => { checkConnection(); });
 document.addEventListener("visibilitychange", () => { if (!document.hidden) checkConnection(); });
 switchView(false);

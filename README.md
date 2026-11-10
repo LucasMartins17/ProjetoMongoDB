@@ -4,6 +4,14 @@
 
 O sistema usa **Flask + PyMongo + MongoDB**, com interface em português e sem dependências externas de CSS, gráficos ou mapas no navegador. O MongoDB Compass permite inspecionar o mesmo banco usado pela aplicação.
 
+## Interface
+
+A identidade visual usa azul cobalto, detalhes em laranja e fundo em tom de papel. A navegação horizontal reúne visão geral, ocorrências e indicadores. O painel destaca as urgências e oferece um atalho para os registros de prioridade urgente; na lista, atalhos permitem consultar abertos, em manutenção e resolvidos.
+
+O cadastro organiza os campos por assunto e mantém custos, tags e fotos em uma seção opcional expansível. A interface inclui navegação por teclado, link para pular ao conteúdo, indicação de carregamento e confirmação visual durante o salvamento. O layout se adapta ao celular, mantendo a rolagem horizontal das tabelas dentro de seus próprios painéis.
+
+Os componentes base estão em `static/style.css` e a identidade visual e seus ajustes responsivos em `static/interface.css`. Para verificar os fluxos reais e gerar capturas em `test-results/`, execute `python scripts/verificar_interface.py` com as dependências de desenvolvimento instaladas e o MongoDB ativo. O script usa um banco temporário isolado e verifica também as três telas entre 320 e 1440 pixels.
+
 ## Abrir o projeto
 
 Requisitos: Python 3.10 ou superior e MongoDB Community Server instalado. O MongoDB 7.3 disponível neste computador foi usado na verificação. Na primeira instalação das dependências, é necessário acesso à internet.

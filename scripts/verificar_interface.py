@@ -64,6 +64,17 @@ def main():
             screenshot("visao-geral.png")
             print("OK: conexão prepara 30 documentos e abre o painel.")
 
+            page.locator("#attention-action").click()
+            expect(page.locator("#filter-priority")).to_have_value("4")
+            expect(page.locator('.quick-filter[data-quick="urgent"]')).to_have_attribute("aria-pressed", "true")
+            expect(page.locator("#occurrence-rows tr")).to_have_count(6)
+            page.locator('.quick-filter[data-quick="resolvido"]').click()
+            expect(page.locator("#filter-status")).to_have_value("resolvido")
+            expect(page.locator("#occurrence-rows .status-resolvido")).to_have_count(9)
+            page.locator("#filter-block").select_option("B")
+            expect(page.locator('.quick-filter.active')).to_have_count(0)
+            page.locator('[data-view="overview"]').click()
+
             page.locator('.map-building[data-block="B"]').click()
             expect(page.locator("#view-occurrences")).to_be_visible()
             expect(page.locator("#filter-block")).to_have_value("B")
@@ -76,6 +87,10 @@ def main():
 
             page.get_by_role("button", name="Nova ocorrência", exact=True).click()
             form = page.locator("#occurrence-form")
+            expect(form.locator('[name="tags"]')).not_to_be_visible()
+            form.locator(".optional-details summary").click()
+            expect(form.locator('[name="tags"]')).to_be_visible()
+            screenshot("formulario.png")
             title = "Projetor do auditório - teste de interface"
             for field, value in {
                 "titulo": title, "descricao": "Projetor não liga durante as atividades no auditório do bloco B.",
@@ -131,6 +146,16 @@ def main():
             expect(page.locator("#view-overview")).to_be_visible()
             screenshot("celular.png")
             assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth"), page.evaluate("[...document.querySelectorAll('body *')].filter(e=>e.getBoundingClientRect().right>innerWidth+1).map(e=>({tag:e.tagName,cls:e.className?.baseVal??e.className,width:e.getBoundingClientRect().width,right:e.getBoundingClientRect().right})).slice(0,20)")
+
+            for width in (320, 580, 768, 1024, 1440):
+                page.set_viewport_size({"width": width, "height": 900})
+                for view in ("overview", "occurrences", "queries"):
+                    page.locator(f'[data-view="{view}"]').click()
+                    expect(page.locator(f"#view-{view}")).to_be_visible()
+                    assert page.evaluate("document.documentElement.scrollWidth <= innerWidth"), (width, view, page.evaluate("[...document.querySelectorAll('body *')].filter(e=>e.getBoundingClientRect().right>innerWidth+1 && !e.parentElement?.closest('.table-scroll,.query-result')).map(e=>({tag:e.tagName,cls:e.className?.baseVal??e.className,right:e.getBoundingClientRect().right})).slice(0,12)"))
+            page.set_viewport_size({"width": 390, "height": 844})
+            page.locator('[data-view="overview"]').click()
+            print("OK: atalhos, informações opcionais e três telas responsivas de 320 a 1440 pixels.")
 
             # Queda após uso: qualquer ação recebe 503 e a tela apaga os registros.
             database.client = unavailable_client
