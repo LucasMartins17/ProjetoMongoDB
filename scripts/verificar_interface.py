@@ -130,10 +130,42 @@ def main():
             expect(page.locator(".query-card")).to_have_count(4)
             page.locator(".query-source summary").first.click()
             expect(page.locator(".query-source pre").first).to_be_visible()
+            query_requests = []
+            page.on("request", lambda request: query_requests.append(request.url) if "/api/consultas" in request.url else None)
+            for query_id in ("categorias", "locais", "resolucao"):
+                selector = page.locator(f"#format-{query_id}")
+                result = selector.locator("xpath=../..").locator(".query-result")
+                formats = ("bars", "columns", "table") if query_id == "resolucao" else ("bars", "columns", "pie", "donut", "table")
+                for chart_format in formats:
+                    selector.select_option(chart_format)
+                    if chart_format == "table":
+                        expect(result.locator("table")).to_be_visible()
+                    else:
+                        expect(result.locator("svg.analysis-chart")).to_be_visible()
+                        expect(result.locator(".chart-legend li")).not_to_have_count(0)
+                        assert "NaN" not in result.inner_html()
+                if query_id == "resolucao":
+                    assert selector.locator('option[value="pie"],option[value="donut"]').count() == 0
+            assert not query_requests, "Trocar formato não deve consultar novamente o banco."
+            page.locator("#format-categorias").select_option("donut")
+            page.locator("#format-locais").select_option("pie")
             page.locator("#query-block").select_option("B")
+            expect(page.locator("#format-categorias")).to_have_value("donut")
+            expect(page.locator("#format-locais")).to_have_value("pie")
             expect(page.locator(".query-card").nth(3).locator(".query-result")).not_to_contain_text("Bloco A")
             expect(page.locator(".query-card").nth(3).locator(".query-result")).to_contain_text("Bloco B")
+            expect(page.locator(".query-card").nth(3).locator(".chart-legend li")).to_have_count(1)
+            expect(page.locator(".query-card").nth(3).locator("svg.analysis-chart>circle")).to_have_count(1)
+            # Recortes vazios, totais zerados e rótulos vindos do banco.
+            assert page.evaluate("""() => {
+                const query = {id: 'categorias', resultados: []};
+                if (!queryVisual(query).includes('Nenhum resultado')) return false;
+                query.resultados = [{categoria: '<img src=x onerror=alert(1)>', total: 0, pendentes: 0, custo: 0}];
+                const html = queryVisual(query);
+                return html.includes('Todos os valores são zero') && !html.includes('<img') && !html.includes('NaN');
+            }""")
             screenshot("consultas.png")
+            print("OK: formatos, legendas, filtro preservado, fatia única, valores zerados e textos escapados.")
             with page.expect_download() as download_info:
                 page.locator(".export-button").click()
             download = download_info.value
@@ -153,6 +185,12 @@ def main():
                     page.locator(f'[data-view="{view}"]').click()
                     expect(page.locator(f"#view-{view}")).to_be_visible()
                     assert page.evaluate("document.documentElement.scrollWidth <= innerWidth"), (width, view, page.evaluate("[...document.querySelectorAll('body *')].filter(e=>e.getBoundingClientRect().right>innerWidth+1 && !e.parentElement?.closest('.table-scroll,.query-result')).map(e=>({tag:e.tagName,cls:e.className?.baseVal??e.className,right:e.getBoundingClientRect().right})).slice(0,12)"))
+                    if view == "queries":
+                        expect(page.locator("#format-categorias")).to_have_value("donut")
+                        for chart_format in ("bars", "columns", "pie", "donut", "table"):
+                            page.locator("#format-categorias").select_option(chart_format)
+                            assert page.evaluate("document.documentElement.scrollWidth <= innerWidth"), (width, chart_format)
+                        page.locator("#format-categorias").select_option("donut")
             page.set_viewport_size({"width": 390, "height": 844})
             page.locator('[data-view="overview"]').click()
             print("OK: atalhos, informações opcionais e três telas responsivas de 320 a 1440 pixels.")

@@ -79,7 +79,7 @@ O endereço mostrado na ajuda da interface corresponde à conexão local padrão
 - **Acompanhamento:** responsável, histórico automático de mudanças de situação e datas de abertura, atualização e resolução.
 - **Fotos opcionais:** até três links HTTP/HTTPS por ocorrência; não há upload de arquivos.
 - **Validações:** formulário, servidor e schema BSON na coleção. Uma edição desatualizada recebe conflito HTTP 409, evitando sobrescrever alterações de outra janela.
-- **Consultas e indicadores:** quatro consultas reais com recorte por bloco, gráfico de categorias e visualização do comando executado.
+- **Consultas e indicadores:** quatro consultas reais com recorte por bloco e visualização do comando executado. Nos indicadores de demanda por categoria e por local, escolha barras, colunas, pizza, rosca ou tabela. O tempo médio de resolução oferece barras, colunas e tabela (médias não são parcelas de um total). Cada indicador mantém sua escolha ao filtrar ou navegar durante o uso da página; as legendas mostram valores e detalhes. Os gráficos são SVG locais, sem bibliotecas ou serviços externos.
 - **Exportação:** botão **Exportar JSON** baixa a coleção atual em MongoDB Extended JSON, preservando ObjectIds e datas.
 
 O protótipo é de uso local, sem autenticação ou perfis de usuário. O servidor inicia em `127.0.0.1`, com debug desligado. Todos os exemplos iniciais são fictícios e usam e-mails `example.com`.

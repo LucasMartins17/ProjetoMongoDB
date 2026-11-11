@@ -7,6 +7,10 @@ const priorityLabels = { 1: "Baixa", 2: "Média", 3: "Alta", 4: "Urgente" };
 const viewHashes = { overview: "#visao-geral", occurrences: "#ocorrencias", queries: "#consultas" };
 const state = { connected: false, epoch: 0, view: "overview", page: 1, pages: 1, editDoc: null, checking: false, saving: false, refreshId: 0, listId: 0, queryId: 0 };
 const money = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
+const chartNumber = new Intl.NumberFormat("pt-BR", { maximumFractionDigits: 1 });
+const queryFormats = { categorias: "bars", resolucao: "table", locais: "table" };
+const chartColors = ["#2448d8", "#c45c28", "#248465", "#8254b5", "#a27412", "#287e9a", "#b54669", "#596779"];
+let currentQueries = [];
 const shortDate = new Intl.DateTimeFormat("pt-BR", { day: "2-digit", month: "short" });
 const fullDate = new Intl.DateTimeFormat("pt-BR", { dateStyle: "short", timeStyle: "short" });
 
@@ -39,6 +43,7 @@ function blockApplication(message, title = "Ative o MongoDB para começar") {
   state.connected = false;
   state.editDoc = null;
   state.page = 1;
+  currentQueries = [];
   $("#app-shell").hidden = true;
   $("#connection-gate").hidden = false;
   $("#connection-title").textContent = title;
@@ -207,16 +212,70 @@ async function refreshAll() {
 
 function emptyQuery() { return `<div class="empty-state">${icon("search")}<h3>Nenhum resultado neste recorte</h3><p>Experimente selecionar outro bloco.</p></div>`; }
 function queryTable(headers, rows) { return `<table><thead><tr>${headers.map(header => `<th scope="col">${escapeHTML(header)}</th>`).join("")}</tr></thead><tbody>${rows.map(row => `<tr>${row.map(cell => `<td>${cell}</td>`).join("")}</tr>`).join("")}</tbody></table>`; }
-function queryVisual(query) {
+function queryDataTable(query) {
   const rows = query.resultados;
   if (!rows.length) return emptyQuery();
   if (query.id === "urgentes") return queryTable(["Ocorrência", "Prioridade", "Bloco"], rows.map(row => [`<button class="row-title" data-open="${row._id}">${escapeHTML(row.titulo)}</button><span class="cell-subtitle">${escapeHTML(statusLabels[row.status])}</span>`, priorityBadge(row.prioridade), escapeHTML(row.localizacao.bloco)]));
   if (query.id === "categorias") {
-    const max = Math.max(1, ...rows.map(row => row.total));
-    return `<p class="query-result-caption">Total de registros · Custo estimado</p>` + rows.map(row => `<div class="chart-row"><div class="chart-row-top"><span>${escapeHTML(row.categoria)} <small>(${row.pendentes} pendentes)</small></span><span>${row.total} <small>· ${money.format(row.custo)}</small></span></div><div class="chart-track"><div class="chart-fill" data-width="${row.total / max * 100}"></div></div></div>`).join("");
+    return queryTable(["Categoria", "Total", "Pendentes", "Custo estimado"], rows.map(row => [escapeHTML(row.categoria), row.total, row.pendentes, money.format(row.custo)]));
   }
   if (query.id === "resolucao") return queryTable(["Categoria", "Resolvidas", "Média"], rows.map(row => [escapeHTML(row.categoria), row.resolvidos, `<strong>${escapeHTML(String(row.media_horas).replace(".", ","))} h</strong>`]));
   return queryTable(["Bloco", "Ocorrências", "Urgências abertas"], rows.map(row => [`<strong>Bloco ${escapeHTML(row.bloco)}</strong><span class="cell-subtitle">${escapeHTML([...row.categorias].sort().join(", "))}</span>`, row.total, row.urgentes]));
+}
+
+function visualizationControls(query) {
+  if (!(query.id in queryFormats)) return "";
+  const formats = [["bars", "Barras"], ["columns", "Colunas"], ... (query.id === "resolucao" ? [] : [["pie", "Pizza"], ["donut", "Rosca"]]), ["table", "Tabela"]];
+  return `<div class="visualization-controls"><label for="format-${query.id}">Visualização</label><select id="format-${query.id}" data-query-format="${query.id}" aria-label="Visualização de ${escapeHTML(query.titulo)}">${formats.map(([value, label]) => `<option value="${value}"${queryFormats[query.id] === value ? " selected" : ""}>${label}</option>`).join("")}</select></div>`;
+}
+
+function queryVisual(query) {
+  const format = queryFormats[query.id] || "table";
+  if (format === "table" || !query.resultados.length) return queryDataTable(query);
+  const hours = query.id === "resolucao";
+  const points = query.resultados.map(row => ({
+    label: query.id === "locais" ? `Bloco ${row.bloco}` : row.categoria,
+    value: Number(hours ? row.media_horas : row.total),
+    detail: query.id === "categorias" ? `${row.pendentes} pendentes · ${money.format(row.custo)}` : hours ? `${row.resolvidos} resolvidas` : `${row.urgentes} urgências abertas`
+  }));
+  const total = points.reduce((sum, point) => sum + point.value, 0);
+  const max = Math.max(1, ...points.map(point => point.value));
+  const valueLabel = value => `${chartNumber.format(value)}${hours ? " h" : ""}`;
+  const color = index => chartColors[index % chartColors.length];
+  const caption = hours ? "Tempo médio de resolução · horas" : "Total de ocorrências";
+  const description = points.map(point => `${point.label}: ${valueLabel(point.value)}`).join("; ");
+  let drawing;
+  if (format === "bars") {
+    const height = points.length * 52 + 12;
+    drawing = `<svg class="analysis-chart" viewBox="0 0 480 ${height}" role="img" aria-label="${escapeHTML(description)}">${points.map((point, index) => {
+      const y = index * 52 + 18;
+      return `<text x="0" y="${y}" class="chart-label">${escapeHTML(point.label)}</text><rect x="0" y="${y + 8}" width="390" height="12" rx="4" fill="#edf0f8"/><rect x="0" y="${y + 8}" width="${point.value / max * 390}" height="12" rx="4" fill="${color(index)}"><title>${escapeHTML(`${point.label}: ${valueLabel(point.value)}`)}</title></rect><text x="478" y="${y + 19}" text-anchor="end" class="chart-label">${valueLabel(point.value)}</text>`;
+    }).join("")}</svg>`;
+  } else if (format === "columns") {
+    const step = 420 / points.length;
+    drawing = `<svg class="analysis-chart" viewBox="0 0 480 250" role="img" aria-label="${escapeHTML(description)}">${[0, .25, .5, .75, 1].map(ratio => `<line x1="48" x2="478" y1="${210 - ratio * 180}" y2="${210 - ratio * 180}" stroke="#dedfdc"/><text x="40" y="${214 - ratio * 180}" text-anchor="end" class="chart-tick">${chartNumber.format(max * ratio)}</text>`).join("")}${points.map((point, index) => {
+      const x = 54 + index * step + step * .2;
+      const height = point.value / max * 180;
+      return `<rect x="${x}" y="${210 - height}" width="${step * .6}" height="${height}" rx="3" fill="${color(index)}"><title>${escapeHTML(`${point.label}: ${valueLabel(point.value)}`)}</title></rect><text x="${x + step * .3}" y="${Math.max(16, 202 - height)}" text-anchor="middle" class="chart-tick">${chartNumber.format(point.value)}</text><text x="${x + step * .3}" y="233" text-anchor="middle" class="chart-tick">${index + 1}</text>`;
+    }).join("")}</svg>`;
+  } else if (total > 0) {
+    let angle = -Math.PI / 2;
+    const slices = points.map((point, index) => {
+      if (point.value <= 0) return "";
+      const sweep = point.value / total * Math.PI * 2;
+      const start = angle;
+      angle += sweep;
+      const title = escapeHTML(`${point.label}: ${valueLabel(point.value)} (${chartNumber.format(point.value / total * 100)}%)`);
+      // Um círculo completo precisa de circle; um único arco SVG não o desenha.
+      if (point.value === total) return `<circle cx="120" cy="120" r="100" fill="${color(index)}"><title>${title}</title></circle>`;
+      return `<path d="M120 120 L${120 + 100 * Math.cos(start)} ${120 + 100 * Math.sin(start)} A100 100 0 ${sweep > Math.PI ? 1 : 0} 1 ${120 + 100 * Math.cos(angle)} ${120 + 100 * Math.sin(angle)} Z" fill="${color(index)}" stroke="white" stroke-width="2"><title>${title}</title></path>`;
+    }).join("");
+    drawing = `<svg class="analysis-chart circular-chart" viewBox="0 0 240 240" role="img" aria-label="${escapeHTML(description)}">${slices}${format === "donut" ? `<circle cx="120" cy="120" r="62" fill="white"/><text x="120" y="119" text-anchor="middle" class="chart-total">${chartNumber.format(total)}</text><text x="120" y="140" text-anchor="middle" class="chart-tick">ocorrências</text>` : ""}</svg>`;
+  } else {
+    drawing = `<p class="chart-zero">Todos os valores são zero neste recorte.</p>`;
+  }
+  const circular = format === "pie" || format === "donut";
+  return `<figure class="query-chart"><figcaption>${caption}</figcaption>${drawing}<ol class="chart-legend">${points.map((point, index) => `<li><svg width="12" height="12" aria-hidden="true"><rect width="12" height="12" rx="3" fill="${color(index)}"/></svg><span><strong>${format === "columns" ? `${index + 1}. ` : ""}${escapeHTML(point.label)}</strong><small>${escapeHTML(point.detail)}</small></span><span class="legend-value">${valueLabel(point.value)}${circular && total > 0 ? `<small>${chartNumber.format(point.value / total * 100)}%</small>` : ""}</span></li>`).join("")}</ol></figure>`;
 }
 
 async function loadQueries() {
@@ -224,9 +283,8 @@ async function loadQueries() {
   const block = $("#query-block").value;
   const data = await api(`/api/consultas?${new URLSearchParams({ bloco: block })}`);
   if (id !== state.queryId || !state.connected) return;
-  $("#query-results").innerHTML = data.consultas.map((query, index) => `<article class="card query-card"><div class="query-card-top"><span class="query-number">CONSULTA 0${index + 1}</span><span class="query-type">${escapeHTML(query.tipo)}</span></div><h2>${escapeHTML(query.titulo)}</h2><p class="query-description">${escapeHTML(query.descricao)}</p><div class="operator-list">${query.operadores.map(operator => `<span class="operator">${escapeHTML(operator)}</span>`).join("")}</div><div class="query-result">${queryVisual(query)}</div><details class="query-source"><summary>Ver consulta executada no MongoDB</summary><pre>${escapeHTML(JSON.stringify(query.consulta, null, 2))}</pre></details></article>`).join("");
-  // Valores numéricos são aplicados por CSSOM, mantendo a política de scripts restrita.
-  $$(".chart-fill").forEach(element => { element.style.width = `${Number(element.dataset.width)}%`; });
+  currentQueries = data.consultas;
+  $("#query-results").innerHTML = data.consultas.map((query, index) => `<article class="card query-card"><div class="query-card-top"><span class="query-number">CONSULTA 0${index + 1}</span><span class="query-type">${escapeHTML(query.tipo)}</span></div><h2>${escapeHTML(query.titulo)}</h2><p class="query-description">${escapeHTML(query.descricao)}</p><div class="operator-list">${query.operadores.map(operator => `<span class="operator">${escapeHTML(operator)}</span>`).join("")}</div>${visualizationControls(query)}<div class="query-result" aria-live="polite">${queryVisual(query)}</div><details class="query-source"><summary>Ver consulta executada no MongoDB</summary><pre>${escapeHTML(JSON.stringify(query.consulta, null, 2))}</pre></details></article>`).join("");
 }
 
 function currentView() { return Object.keys(viewHashes).find(view => viewHashes[view] === location.hash) || "overview"; }
@@ -432,6 +490,14 @@ $("#clear-filters").addEventListener("click", () => { clearTimeout(searchTimer);
 $("#previous-page").addEventListener("click", () => { if (state.page > 1) { state.page -= 1; loadList().catch(report); } });
 $("#next-page").addEventListener("click", () => { if (state.page < state.pages) { state.page += 1; loadList().catch(report); } });
 $("#query-block").addEventListener("change", () => loadQueries().catch(report));
+$("#query-results").addEventListener("change", event => {
+  const select = event.target.closest("[data-query-format]");
+  if (!select) return;
+  const query = currentQueries.find(item => item.id === select.dataset.queryFormat);
+  if (!query) return;
+  queryFormats[query.id] = select.value;
+  $(".query-result", select.closest(".query-card")).innerHTML = queryVisual(query);
+});
 window.addEventListener("hashchange", () => { switchView(); $("#main-content").focus({ preventScroll: true }); window.scrollTo({ top: 0, behavior: "instant" }); });
 window.addEventListener("focus", () => { checkConnection(); });
 document.addEventListener("visibilitychange", () => { if (!document.hidden) checkConnection(); });

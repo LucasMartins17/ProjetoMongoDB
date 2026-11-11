@@ -182,6 +182,26 @@ tbody tr:hover { background:#fafbff; }
 .query-source summary { color:#536caa; font-size:12px; padding-block:6px; }
 .query-source pre { color:#d1dafd; background:#202b4a; font-size:11px; }
 .query-result-caption { color:var(--muted); font-size:10px; }
+.visualization-controls { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px 14px; padding:12px 0; border-top:1px solid var(--line); margin-bottom:12px; }
+.visualization-controls label { font-size:12px; font-weight:600; color:var(--muted); }
+.visualization-controls select { min-height:42px; min-width:130px; max-width:100%; font-size:12px; background:#f8f9fe; }
+.query-card:has(.visualization-controls) .query-result { max-height:none; overflow:visible; }
+.query-card:has(.visualization-controls) .query-result:has(table) { overflow:auto; }
+.query-chart { margin:0; }
+.query-chart figcaption { color:var(--muted); font-size:12px; margin-bottom:12px; }
+.analysis-chart { display:block; width:100%; height:auto; overflow:visible; }
+.circular-chart { max-width:240px; margin:8px auto 20px; }
+.chart-label { fill:var(--ink); font-size:13px; }
+.chart-tick { fill:var(--muted); font-size:12px; }
+.chart-total { fill:var(--ink); font-size:29px; font-weight:700; }
+.chart-legend { list-style:none; padding:0; margin:14px 0 0; }
+.chart-legend li { display:flex; align-items:center; gap:10px; padding:9px 0; border-bottom:1px solid #edf0f8; font-size:12px; }
+.chart-legend li>svg { flex-shrink:0; }
+.chart-legend li>span { min-width:0; overflow-wrap:anywhere; }
+.chart-legend strong { font-weight:600; }
+.chart-legend small { display:block; color:var(--muted); font-size:11px; margin-top:3px; }
+.chart-legend .legend-value { margin-left:auto; text-align:right; flex-shrink:0; font-weight:600; }
+.chart-zero { color:var(--muted); font-size:13px; text-align:center; padding:30px 10px; }
 .page-footer { border-top:1px solid var(--line); padding-top:23px; color:var(--muted); font-size:10px; }
 .page-footer>span:first-child { color:var(--muted); }
 

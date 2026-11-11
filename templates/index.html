@@ -103,7 +103,7 @@
         </section>
 
         <section id="view-queries" class="view" aria-label="Consultas e indicadores do MongoDB" hidden>
-          <div class="queries-intro"><div><span class="query-live"><span class="live-dot"></span>CONSULTAS NO BANCO</span><p>Quatro perspectivas para entender o campus e decidir o que precisa de atenção.</p></div><label>Recorte por bloco<select id="query-block"><option value="">Campus inteiro</option>{% for block in blocks %}<option value="{{ block }}">Bloco {{ block }}</option>{% endfor %}</select></label></div><div id="query-results" class="queries-grid"></div>
+          <div class="queries-intro"><div><span class="query-live"><span class="live-dot"></span>CONSULTAS NO BANCO</span><p>Quatro perspectivas para entender o campus. Escolha a visualização em cada indicador: barras, colunas, pizza, rosca ou tabela.</p></div><label>Recorte por bloco<select id="query-block"><option value="">Campus inteiro</option>{% for block in blocks %}<option value="{{ block }}">Bloco {{ block }}</option>{% endfor %}</select></label></div><div id="query-results" class="queries-grid"></div>
         </section>
         <footer class="page-footer"><span>resolve campus <span class="footer-separator">/</span> Cuidar faz parte.</span><span id="last-update">Dados do MongoDB local</span></footer>
       </main>
