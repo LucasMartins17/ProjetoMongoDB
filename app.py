@@ -1,4 +1,4 @@
-"""Servidor local Flask. Execute: py app.py."""
+"""Aplicação Flask. Para executar localmente, use py app.py."""
 
 # O comando pedido na atividade usa o Python Launcher do Windows. Se ele
 # selecionar um Python sem as bibliotecas, reutiliza o ambiente deste projeto.
@@ -38,7 +38,7 @@ from campus.domain import BLOCKS, CATEGORIES, PRIORITIES, STATUSES, ValidationEr
 
 
 def create_app(config=None):
-    app = Flask(__name__)
+    app = Flask(__name__, static_folder="public/static", static_url_path="/static")
     app.config.update(
         MONGO_URI=os.environ.get("MONGO_URI", "mongodb://localhost:27017"),
         MONGO_DB=os.environ.get("MONGO_DB", "resolve_campus"),
@@ -240,9 +240,11 @@ def create_app(config=None):
     return app
 
 
+app = create_app()
+
+
 if __name__ == "__main__":
-    application = create_app()
     try:
-        application.run(host="127.0.0.1", port=int(os.environ.get("PORT", "5000")), debug=False)
+        app.run(host="127.0.0.1", port=int(os.environ.get("PORT", "5000")), debug=False)
     finally:
-        application.extensions["campus_db"].client.close()
+        app.extensions["campus_db"].client.close()

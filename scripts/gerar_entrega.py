@@ -115,7 +115,7 @@ def create_pdf(path, names, github, documents, metadata):
     paragraph("MongoDB Compass é a interface de administração. O serviço MongoDB é quem armazena e fornece os dados; abrir somente o Compass não inicia necessariamente o servidor.")
     heading("3. Arquitetura")
     paragraph("Navegador (HTML/CSS/JavaScript) -> API Flask -> PyMongo -> MongoDB local. O Compass pode acessar o mesmo banco para verificar documentos, índices e validação.")
-    paragraph("Arquivos principais: app.py (rotas), campus/database.py (conexão e inicialização), campus/domain.py (validação), campus/analytics.py (consultas), campus/seed.py (exemplos), templates/index.html (interface), static/app.js (interações).")
+    paragraph("Arquivos principais: app.py (rotas), campus/database.py (conexão e inicialização), campus/domain.py (validação), campus/analytics.py (consultas), campus/seed.py (exemplos), templates/index.html (interface), public/static/app.js (interações).")
     heading("4. Modelo da coleção ocorrencias")
     rows = [[Paragraph("Campo", styles["CampusLabel"]), Paragraph("Tipo BSON", styles["CampusLabel"]), Paragraph("Finalidade", styles["CampusLabel"])]]
     rows += [[Paragraph(escape(value), styles["CampusSmall"]) for value in field] for field in FIELDS]

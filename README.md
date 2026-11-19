@@ -10,7 +10,7 @@ A identidade visual usa azul cobalto, detalhes em laranja e fundo em tom de pape
 
 O cadastro organiza os campos por assunto e mantém custos, tags e fotos em uma seção opcional expansível. A interface inclui navegação por teclado, link para pular ao conteúdo, indicação de carregamento e confirmação visual durante o salvamento. O layout se adapta ao celular, mantendo a rolagem horizontal das tabelas dentro de seus próprios painéis.
 
-Os componentes base estão em `static/style.css` e a identidade visual e seus ajustes responsivos em `static/interface.css`. Para verificar os fluxos reais e gerar capturas em `test-results/`, execute `python scripts/verificar_interface.py` com as dependências de desenvolvimento instaladas e o MongoDB ativo. O script usa um banco temporário isolado e verifica também as três telas entre 320 e 1440 pixels.
+Os componentes base estão em `public/static/style.css` e a identidade visual e seus ajustes responsivos em `public/static/interface.css`. Para verificar os fluxos reais e gerar capturas em `test-results/`, execute `python scripts/verificar_interface.py` com as dependências de desenvolvimento instaladas e o MongoDB ativo. O script usa um banco temporário isolado e verifica também as três telas entre 320 e 1440 pixels.
 
 ## Abrir o projeto
 
@@ -154,7 +154,7 @@ campus/domain.py             Validação e regras de negócio
 campus/seed.py               30 exemplos fictícios
 campus/analytics.py          Quatro consultas acadêmicas
 templates/index.html        Interface
-static/                     CSS, JavaScript e favicon
+public/static/              CSS, JavaScript e favicon
 tests/test_app.py           Testes de integração e indisponibilidade
 scripts/verificar_interface.py  Verificação real no Edge
 scripts/gerar_entrega.py     Gerador do PDF e dos JSONs
