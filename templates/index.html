@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='interface.css') }}">
   <script src="{{ url_for('static', filename='app.js') }}" defer></script>
 </head>
-<body>
+<body{% if hosted %} data-hosted{% endif %}>
   <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
   <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></symbol>
@@ -41,11 +41,15 @@
       <span class="eyebrow">SEU PONTO DE CONEXÃO COM O CAMPUS</span>
       <h1 id="connection-title">Verificando a conexão…</h1>
       <p id="connection-message" role="status">Estamos verificando se o MongoDB está ativo para abrir seu espaço de trabalho.</p>
-      <div class="connection-address"><svg class="icon"><use href="#i-db"/></svg><code>mongodb://localhost:27017</code></div>
+      <div class="connection-address"><svg class="icon"><use href="#i-db"/></svg><code>{{ 'MongoDB Atlas' if hosted else 'mongodb://localhost:27017' }}</code></div>
       <div id="connection-help" class="connection-help" hidden>
+        {% if hosted %}
+        <p>Clique em <b>Tentar conexão</b> para verificar novamente o acesso ao MongoDB Atlas.</p>
+        {% else %}
         <strong>Como conectar</strong>
         <ol><li>Abra <b>Serviços</b> no Windows e inicie o serviço <b>MongoDB</b>.</li><li>No MongoDB Compass, conecte usando o endereço acima.</li><li>Clique em <b>Tentar conexão</b>. O banco será preparado automaticamente.</li></ol>
         <p>O Compass é a interface de gerenciamento. O serviço MongoDB precisa estar em execução.</p>
+        {% endif %}
       </div>
       <button id="retry-connection" class="button primary" type="button" disabled><svg class="icon"><use href="#i-refresh"/></svg><span>Verificando…</span></button>
       <small class="gate-note">Sem conexão, os dados e as ações ficam indisponíveis.</small>
@@ -105,7 +109,7 @@
         <section id="view-queries" class="view" aria-label="Consultas e indicadores do MongoDB" hidden>
           <div class="queries-intro"><div><span class="query-live"><span class="live-dot"></span>CONSULTAS NO BANCO</span><p>Quatro perspectivas para entender o campus. Escolha a visualização em cada indicador: barras, colunas, pizza, rosca ou tabela.</p></div><label>Recorte por bloco<select id="query-block"><option value="">Campus inteiro</option>{% for block in blocks %}<option value="{{ block }}">Bloco {{ block }}</option>{% endfor %}</select></label></div><div id="query-results" class="queries-grid"></div>
         </section>
-        <footer class="page-footer"><span>resolve campus <span class="footer-separator">/</span> Cuidar faz parte.</span><span id="last-update">Dados do MongoDB local</span></footer>
+        <footer class="page-footer"><span>resolve campus <span class="footer-separator">/</span> Cuidar faz parte.</span><span id="last-update">Dados do {{ 'MongoDB Atlas' if hosted else 'MongoDB local' }}</span></footer>
       </main>
     </div>
   </div>

@@ -51,6 +51,7 @@ def create_app(config=None):
     db = Database(app.config["MONGO_URI"], app.config["MONGO_DB"], app.config["MONGO_TIMEOUT"])
     app.extensions["campus_db"] = db
     app.json.sort_keys = False
+    hosted = os.environ.get("VERCEL") == "1"
 
     def error(message, status=400, code="invalid_request"):
         return jsonify(error=message, code=code), status
@@ -79,11 +80,23 @@ def create_app(config=None):
 
     @app.errorhandler(ConnectionFailure)
     def offline(_exc):
+        if hosted:
+            return error("Não foi possível conectar ao MongoDB Atlas. Clique em Tentar conexão.", 503, "mongo_offline")
         return error("Não foi possível conectar ao MongoDB. Ative o serviço MongoDB e clique em Tentar conexão.", 503, "mongo_offline")
 
     @app.errorhandler(OperationFailure)
     def operation_failure(exc):
-        app.logger.error("MongoDB recusou uma operação (código %s).", exc.code)
+        detail = (exc.details or {}).get("errmsg") or ""
+        reason = detail.casefold()
+        if exc.code == 18 or "authentication failed" in reason or "bad auth" in reason:
+            app.logger.error("MongoDB recusou a autenticação (código %s).", exc.code)
+            return error("O MongoDB recusou a autenticação. Confira o usuário e a senha da conexão.", 503, "mongo_auth")
+
+        denied_action = re.search(r"not allowed to do action \[([a-z0-9_]+)\]", detail, re.IGNORECASE)
+        if denied_action:
+            app.logger.error("MongoDB recusou a permissão para %s (código %s).", denied_action[1], exc.code)
+        else:
+            app.logger.error("MongoDB recusou uma operação (código %s).", exc.code)
         if exc.code == 121:
             return error("Os dados não atendem à validação da coleção MongoDB.", 400, "validation_error")
         return error("O MongoDB está acessível, mas recusou a operação. Confira as permissões do usuário e a configuração do banco.", 503, "mongo_unavailable")
@@ -108,7 +121,8 @@ def create_app(config=None):
 
     @app.get("/")
     def index():
-        return render_template("index.html", categories=CATEGORIES, blocks=BLOCKS, statuses=STATUSES, priorities=PRIORITIES)
+        return render_template("index.html", categories=CATEGORIES, blocks=BLOCKS, statuses=STATUSES,
+                               priorities=PRIORITIES, hosted=hosted)
 
     @app.get("/api/status")
     def status():

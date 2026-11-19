@@ -2,6 +2,7 @@
 
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+const hosted = document.body.hasAttribute("data-hosted");
 const statusLabels = { aberto: "Aberto", em_analise: "Em análise", em_manutencao: "Em manutenção", resolvido: "Resolvido" };
 const priorityLabels = { 1: "Baixa", 2: "Média", 3: "Alta", 4: "Urgente" };
 const viewHashes = { overview: "#visao-geral", occurrences: "#ocorrencias", queries: "#consultas" };
@@ -38,7 +39,7 @@ function toast(message, error = false) {
 }
 function report(error) { if (!error.silent) toast(error.message || "Não foi possível concluir a ação.", true); }
 
-function blockApplication(message, title = "Ative o MongoDB para começar") {
+function blockApplication(message, title) {
   state.epoch += 1;
   state.connected = false;
   state.editDoc = null;
@@ -67,7 +68,9 @@ async function api(path, options = {}) {
   try {
     response = await fetch(path, { cache: "no-store", ...options, headers: { "Content-Type": "application/json", ...options.headers } });
   } catch {
-    blockApplication("Não foi possível acessar o servidor da aplicação. Confira se o Flask está em execução e se o MongoDB está ativo.", "Conexão indisponível");
+    const message = hosted ? "Não foi possível acessar o servidor da aplicação. Tente novamente em instantes."
+      : "Não foi possível acessar o servidor da aplicação. Confira se o Flask está em execução e se o MongoDB está ativo.";
+    blockApplication(message, "Conexão indisponível");
     throw new AppError("Conexão indisponível.", true);
   }
   if (epoch !== state.epoch) throw new AppError("A conexão mudou durante a solicitação.", true);
@@ -75,7 +78,10 @@ async function api(path, options = {}) {
   if (epoch !== state.epoch) throw new AppError("A conexão mudou durante a solicitação.", true);
   if (!response.ok) {
     if (response.status === 503 || String(data.code || "").startsWith("mongo_")) {
-      blockApplication(data.error, data.code === "mongo_offline" ? "Ative o MongoDB para continuar" : "Verifique sua conexão com o banco");
+      const title = data.code === "mongo_offline" && !hosted
+        ? "Ative o MongoDB para continuar"
+        : "Verifique sua conexão com o banco";
+      blockApplication(data.error, title);
       throw new AppError(data.error, true);
     }
     throw new AppError(data.error || "Não foi possível concluir a ação.");
