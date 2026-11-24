@@ -297,6 +297,7 @@ function currentView() { return Object.keys(viewHashes).find(view => viewHashes[
 function switchView(load = true) {
   state.view = currentView();
   $$(".view").forEach(element => element.hidden = element.id !== `view-${state.view}`);
+  $("#download-campus-report").hidden = state.view !== "overview";
   $$(".nav-link").forEach(element => {
     const selected = element.dataset.view === state.view;
     element.classList.toggle("active", selected);
@@ -451,22 +452,22 @@ async function deleteOccurrence() {
   finally { state.saving = false; $("#confirm-delete").disabled = false; }
 }
 
-async function exportJSON(button) {
+async function downloadFile(button, path, filename, message, makeBlob = response => response.blob()) {
   button.disabled = true;
   try {
-    const response = await api("/api/exportar", { raw: true });
     const epoch = state.epoch;
-    const blob = await response.blob();
+    const response = await api(path, { raw: true });
+    const blob = await makeBlob(response);
     if (!state.connected || epoch !== state.epoch) return;
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = "resolve-campus-ocorrencias.json";
+    link.download = filename;
     document.body.append(link);
     link.click();
     link.remove();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
-    toast("JSON exportado com os registros atuais do MongoDB.");
+    toast(message);
   } catch (error) { report(error); }
   finally { button.disabled = false; }
 }
@@ -479,7 +480,16 @@ document.addEventListener("click", event => {
   if (target.dataset.block) selectBlock(target.dataset.block);
   if (target.dataset.quick) quickFilter(target.dataset.quick);
   if (target.dataset.close && !state.saving) document.getElementById(target.dataset.close).close();
-  if (target.classList.contains("export-button")) exportJSON(target);
+  if (target.classList.contains("export-button")) {
+    downloadFile(target, "/api/exportar", "resolve-campus-ocorrencias.json", "JSON exportado com os registros atuais do MongoDB.");
+  }
+});
+
+$("#download-campus-report").addEventListener("click", event => {
+  downloadFile(event.currentTarget, "/api/painel", "resolve-campus-situacao-atual.pdf", "PDF da situação do campus gerado.", async response => {
+    const data = await response.json();
+    return createCampusReport(data, fullDate.format(new Date()));
+  });
 });
 
 $("#retry-connection").addEventListener("click", checkConnection);
